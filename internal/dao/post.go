@@ -82,7 +82,7 @@ func GetPosts(params PostParams) (posts []model.Post, err error) {
 
 func GetPost(id string) (post model.Post) {
 	var tags []byte
-	row := db.QueryRow("select post.id,post.title,post.created_at,post.updated_at,post.category_id,post.tag_ids,post.views,post_content.content,post.description from post left join post_content on post.id=post_content.post_id where post.id=? limit 1\", id")
+	row := db.QueryRow("select post.id,post.title,post.created_at,post.updated_at,post.category_id,post.tag_ids,post.views,post_content.content,post.description from post left join post_content on post.id=post_content.post_id where post.id=? limit 1", id)
 	err := row.Scan(&post.Id, &post.Title, &post.CreatedAt, &post.UpdatedAt, &post.CategoryId, &tags, &post.Views, &post.Content, &post.Description)
 	if utils.IsNotNil(err) {
 		log.Println("get post err", err)
