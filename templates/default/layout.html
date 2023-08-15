@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{.title}}|{{.name}}</title>
+    <meta name="keywords"
+          content="convee,blog,markdown,php,go,golang,git,github,it,shell,linux,蛋壳吧,程序员,博客,源码,架构,算法,数据结构,互联网,程序化广告,教程"/>
+    <meta name="description" content="{{.description}}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{.cdn}}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{{.cdn}}/css/style.css">
+    <link rel="stylesheet" href="{{.cdn}}/md/css/editormd.preview.css"/>
+</head>
+
+<body>
+<header>
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#header-navbar" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1 class="logo">
+                    <a href="/">蛋壳吧</a>
+                </h1>
+            </div>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <form class="navbar-form nav navbar-form navbar-right search-nav" action="/" method="GET">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20"
+                               autocomplete="off">
+                        <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default btn-search">搜索</button>
+                            </span>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="/">首页</a></li>
+                    <li><a href="/tag">标签</a></li>
+                    <li><a href="/page?id=2">阅读</a></li>
+                    <li><a href="/page?id=1">关于</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{{template "content" .}}
+<div class="footer">
+    <div class="container">
+        <p>Copyright &copy; 2021.convee All rights reserved</p>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{.cdn}}/css/gitalk.css">
+<script src="{{.cdn}}/js/gitalk.min.js"></script>
+<script src="{{.cdn}}/js/jquery.min.js"></script>
+<script src="{{.cdn}}/js/bootstrap.min.js"></script>
+<script src="{{.cdn}}/md/lib/marked.min.js"></script>
+<script src="{{.cdn}}/md/lib/prettify.min.js"></script>
+
+<script src="{{.cdn}}/md/lib/raphael.min.js"></script>
+<script src="{{.cdn}}/md/lib/underscore.min.js"></script>
+<script src="{{.cdn}}/md/lib/sequence-diagram.min.js"></script>
+<script src="{{.cdn}}/md/lib/flowchart.min.js"></script>
+<script src="{{.cdn}}/md/lib/jquery.flowchart.min.js"></script>
+
+<script src="{{.cdn}}/md/editormd.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var testEditormdView2;
+        testEditormdView2 = editormd.markdownToHTML("test-editormd-view2", {
+            htmlDecode: "style,script,iframe",  // you can filter tags decode
+            emoji: true,
+            taskList: true,
+            tex: true,  // 默认不解析
+            flowChart: true,  // 默认不解析
+            sequenceDiagram: true,  // 默认不解析
+        });
+    });
+    const gitalk = new Gitalk({
+        clientID: 'f06fcb10638b615401a1',
+        clientSecret: '63c47044ce93a5af5e2fff498bc94317ff04d12e',
+        repo: 'goblog',      // The repository of store comments,
+        owner: 'convee',
+        admin: ['convee'],
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+
+    gitalk.render('gitalk-container')
+</script>
+</body>
+
+</html>

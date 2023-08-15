@@ -1,0 +1,81 @@
+package admin
+
+import (
+	"blog/internal/dao"
+	"blog/internal/model"
+	"blog/internal/pkg"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"strconv"
+)
+
+func PageList(c *gin.Context) {
+	perPage, _ := strconv.Atoi(c.Query("per_page"))
+	page, _ := strconv.Atoi(c.Query("page"))
+	if perPage <= 0 {
+		perPage = 20
+	}
+	if page <= 1 {
+		page = 1
+	}
+	pages, err := dao.GetPages(dao.PageParams{
+		PerPage: perPage,
+		Page:    page,
+	})
+	if err != nil {
+		fmt.Println("get pages err:", err)
+		return
+	}
+	data := make(map[string]interface{})
+	data["pages"] = pages
+	data["page"] = page
+	pkg.AdminRender(data, c, "page_list")
+}
+
+func PageAdd(c *gin.Context) {
+	data := make(map[string]interface{})
+	id := c.PostForm("id")
+	var page model.Page
+	if len(id) > 0 {
+		page = dao.GetPage(id)
+	}
+	categories, _ := dao.GetCategories()
+	data["categories"] = categories
+
+	if page.Id > 0 {
+
+		data["id"] = page.Id
+		data["title"] = page.Title
+		data["content"] = page.Content
+	}
+	pkg.AdminRender(data, c, "page_add")
+}
+
+func PageDelete(c *gin.Context) {
+	var page model.Page
+	page.Id, _ = strconv.Atoi(c.Query("id"))
+	_, err := dao.PageDelete(page)
+	if err != nil {
+		data := make(map[string]interface{})
+		data["msg"] = "删除失败，请重试"
+		pkg.AdminRender(data, c, "401")
+		return
+	}
+	c.Redirect(http.StatusFound, "/admin/page")
+}
+
+func PageSave(c *gin.Context) {
+	var page model.Page
+	page.Id, _ = strconv.Atoi(c.PostForm("id"))
+	page.Title = c.PostForm("title")
+	page.Content = c.PostForm("content")
+	_, err := dao.PageSave(page)
+	if err != nil {
+		data := make(map[string]interface{})
+		data["msg"] = "添加或修改失败，请重试"
+		pkg.AdminRender(data, c, "401")
+		return
+	}
+	c.Redirect(http.StatusFound, "/admin/page")
+}
