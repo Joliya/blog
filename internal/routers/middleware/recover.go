@@ -8,10 +8,10 @@ package middleware
 
 import (
 	"blog/conf"
+	"blog/pkg/ding"
 	"blog/pkg/logger"
 	"blog/pkg/utils"
 	"fmt"
-	"github.com/convee/goblog/pkg/ding"
 	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"

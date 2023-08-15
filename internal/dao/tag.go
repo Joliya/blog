@@ -2,7 +2,7 @@ package dao
 
 import (
 	"blog/internal/model"
-	"github.com/convee/goblog/pkg/logger"
+	"blog/pkg/logger"
 	"go.uber.org/zap"
 )
 

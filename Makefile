@@ -7,7 +7,7 @@ TIME = $(shell TZ=Asia/Shanghai date +%Y%m%d%H)
 .PHONY: build
 # make build, Build the binary file
 build: dep
-	GOOS=linux GOARCH=amd64 go build -o "goblog" -v -ldflags "-X main.Commit=$COMMIT"
+	GOOS=linux GOARCH=amd64 go build -o "blog" -v -ldflags "-X main.Commit=$COMMIT"
 
 .PHONY: dep
 # make dep Get the dependencies
@@ -17,7 +17,7 @@ dep:
 .PHONY: tar
 # pack file
 tar:
-	@tar zcvf  goblog-"${TIME}".tar.gz templates/ static/ goblog conf/ *.sh
+	@tar zcvf blog-"${TIME}".tar.gz templates/ static/ blog conf/ *.sh
 
 .PHONY: fmt
 # make fmt
@@ -27,7 +27,7 @@ fmt:
 .PHONY: clean
 # make clean
 clean:
-	@-rm -vrf goblog*
+	@-rm -vrf blog*
 	@go mod tidy
 	@echo "clean finished"
 

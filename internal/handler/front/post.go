@@ -1,6 +1,7 @@
 package front
 
 import (
+	"blog/conf"
 	"blog/internal/dao"
 	"blog/internal/model"
 	"blog/internal/pkg"
@@ -8,8 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"strconv"
 	"strings"
-
-	"github.com/convee/goblog/conf"
 )
 
 func Index(c *gin.Context) {

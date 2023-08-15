@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-process="goblog"
+process="blog"
 echo ${process} $1
 
 start(){

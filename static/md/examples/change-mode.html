@@ -231,8 +231,8 @@ import com.jfinal.core.Controller;
 @Before(BlogInterceptor.class)
 public class BlogController extends Controller {
 	public void index() {
-		setAttr("github.com/convee/goblogPage", Blog.me.paginate(getParaToInt(0, 1), 10));
-		render("github.com/convee/goblog.html");
+		setAttr("github.com/joliya/blogPage", Blog.me.paginate(getParaToInt(0, 1), 10));
+		render("github.com/joliya/blog.html");
 	}
 
 	public void add() {
@@ -245,7 +245,7 @@ public class BlogController extends Controller {
 	}
 
 	public void edit() {
-		setAttr("github.com/convee/goblog", Blog.me.findById(getParaToInt()));
+		setAttr("github.com/Joliya/blog", Blog.me.findById(getParaToInt()));
 	}
 
 	@Before(BlogValidator.class)

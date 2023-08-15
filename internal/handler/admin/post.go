@@ -1,18 +1,17 @@
 package admin
 
 import (
+	"blog/conf"
 	"blog/internal/dao"
 	"blog/internal/es"
 	"blog/internal/model"
 	"blog/internal/pkg"
+	"blog/pkg/utils"
 	"fmt"
-	"github.com/convee/goblog/pkg/utils"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
 	"strings"
-
-	"github.com/convee/goblog/conf"
 )
 
 func PostList(c *gin.Context) {

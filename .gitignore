@@ -1,6 +1,6 @@
 .idea
 .vscode
-goblog*
+blog*
 conf/prod.yml
 conf/local.yml
 logs/*

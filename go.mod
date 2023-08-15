@@ -4,7 +4,6 @@ go 1.20
 
 require (
 	github.com/alicebob/miniredis/v2 v2.30.5
-	github.com/convee/goblog v0.0.0-20230304063506-0940e7adf460
 	github.com/fsnotify/fsnotify v1.6.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-redis/redis/extra/redisotel/v8 v8.11.5
