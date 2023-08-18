@@ -119,7 +119,7 @@ nohup ./goblog dev.yml &
 ```
 
 * docker 启动 es、redis、mysql
-```
+```yml
 version: '3'
 services:
   cerebro:
@@ -222,7 +222,6 @@ volumes:
 networks:
   es7net:
     driver: bridge
-
 ```
 
 * supervisord 部署

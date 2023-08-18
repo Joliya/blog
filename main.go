@@ -7,13 +7,7 @@ import (
 	"blog/internal/routers"
 	"blog/pkg/logger"
 	"blog/pkg/redis"
-	"blog/pkg/shutdown"
-	"blog/pkg/utils"
-	"context"
 	"github.com/spf13/pflag"
-	"log"
-	"net/http"
-	"time"
 )
 
 var (
@@ -31,28 +25,32 @@ func main() {
 		es.Init(&cfg.Elasticsearch)
 	}
 
-	addr := cfg.App.Addr
-	srv := &http.Server{
-		Addr:    addr,
-		Handler: routers.InitRouter(),
+	//addr := cfg.App.Addr
+	//srv := &http.Server{
+	//	Addr:    addr,
+	//	Handler: routers.InitRouter(),
+	//}
+	r := routers.InitRouter()
+	err := r.Run(":9091")
+	if err != nil {
+		return
 	}
-
-	go func() {
-		if err := srv.ListenAndServe(); utils.IsNotNil(err) {
-			log.Println("server run: ", err)
-		}
-	}()
-
-	shutdown.NewHook().Close(
-		// 关闭 http server
-		func() {
-			ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
-			defer cancel()
-			if err := srv.Shutdown(ctx); err != nil {
-				log.Println("http server closed err", err)
-			} else {
-				log.Println("http server closed")
-			}
-		},
-	)
+	//go func() {
+	//	if err := srv.ListenAndServe(); utils.IsNotNil(err) {
+	//		log.Println("server run: ", err)
+	//	}
+	//}()
+	//
+	//shutdown.NewHook().Close(
+	//	// 关闭 http server
+	//	func() {
+	//		ctx, cancel := context.WithTimeout(context.Background(), time.Second*10)
+	//		defer cancel()
+	//		if err := srv.Shutdown(ctx); err != nil {
+	//			log.Println("http server closed err", err)
+	//		} else {
+	//			log.Println("http server closed")
+	//		}
+	//	},
+	//)
 }
